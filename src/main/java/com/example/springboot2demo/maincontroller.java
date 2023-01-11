@@ -1,10 +1,12 @@
 package com.example.springboot2demo;
 
+import com.example.springboot2demo.mapper.LoginMapper;
 import com.example.springboot2demo.mapper.MapperDemo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import user.LoginUser;
 import user.Student;
 
 import javax.annotation.Resource;
@@ -29,12 +31,23 @@ public class maincontroller {
     }
     @Resource
     MapperDemo mapper;
+
+
     @RequestMapping("/id")
     @ResponseBody
         public Student aa(){
         Student student= mapper.finduserbyid(3);
         return student;
 
+    }
+    //    💥一个注解对应一个mapper；写多了 扫描不到 的
+    @Resource
+    LoginMapper login;
+    @RequestMapping("/user")
+    @ResponseBody
+    public LoginUser aaaa(){
+        LoginUser loginUser=login.selectuser("yhf");
+        return loginUser;
     }
 
 
